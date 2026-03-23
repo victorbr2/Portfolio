@@ -1,120 +1,198 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Víctor | Unity Gameplay Programmer</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0f172a;
-      color: #e2e8f0;
-    }
+<meta charset="UTF-8">
+<title>Victor | Gameplay Programmer</title>
 
-    header {
-      text-align: center;
-      padding: 60px 20px;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #e2e8f0;
+}
 
-    h1 {
-      font-size: 48px;
-      margin: 0;
-    }
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
 
-    h2 {
-      color: #38bdf8;
-    }
+/* Header */
+header {
+  text-align: center;
+  padding: 80px 20px;
+  animation: fadeIn 1s ease-out;
+}
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
+h1 {
+  font-size: 56px;
+  margin: 0;
+  letter-spacing: 2px;
+}
 
-    .project {
-      background: #1e293b;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-    }
+.subtitle {
+  color: #38bdf8;
+  font-size: 20px;
+  margin-top: 10px;
+}
 
-    a {
-      color: #38bdf8;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.tagline {
+  margin-top: 15px;
+  opacity: 0.8;
+}
 
-    .button {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 15px;
-      background: #38bdf8;
-      color: black;
-      border-radius: 5px;
-    }
+/* Menu buttons */
+.menu {
+  margin-top: 30px;
+}
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 14px;
-    }
-  </style>
+.button {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 20px;
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  color: #38bdf8;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: #38bdf8;
+  color: black;
+  transform: scale(1.05);
+}
+
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Project cards */
+.project {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  animation: fadeIn 1s ease;
+  transition: 0.3s;
+}
+
+.project:hover {
+  transform: translateY(-5px);
+}
+
+.project h3 {
+  color: #38bdf8;
+}
+
+/* GIF container */
+.gif-container {
+  margin: 15px 0;
+}
+
+.gif-container img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 40px;
+  opacity: 0.6;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>Víctor</h1>
-  <p>Unity Gameplay Programmer</p>
-  <p>Desarrollo sistemas de juego y experiencias interactivas en Unity.</p>
+  <h1>VICTOR</h1>
+  <div class="subtitle">Unity Gameplay Programmer</div>
+  <div class="tagline">
+    I build gameplay systems, mechanics and interactive experiences in Unity
+  </div>
+
+  <div class="menu">
+    <a href="#projects" class="button">🎮 Projects</a>
+    <a href="#about" class="button">🧠 About</a>
+    <a href="#contact" class="button">📩 Contact</a>
+  </div>
 </header>
 
-<div class="container">
+<div class="container" id="projects">
 
-  <h2>🎮 Proyectos</h2>
+  <h2>🎮 Projects</h2>
 
+  <!-- PROJECT 1 -->
   <div class="project">
     <h3>🐜 Bugzonia</h3>
-    <p>Juego de estrategia por turnos ambientado en el Amazonas.</p>
+    <p>Turn-based strategy game with dynamic territory control.</p>
 
-    <p><strong>Qué hice:</strong></p>
+    <!-- GIF TEMPLATE -->
+    <div class="gif-container">
+      <img src="gifs/bugzonia.gif" alt="Bugzonia gameplay">
+    </div>
+
     <ul>
-      <li>Sistema de turnos modular</li>
-      <li>Control territorial dinámico</li>
-      <li>Arquitectura basada en managers</li>
+      <li>Modular turn system</li>
+      <li>Grid-based movement</li>
+      <li>Decoupled architecture using managers</li>
     </ul>
 
-    <a href="https://caeldeth1.itch.io/" target="_blank" class="button">▶️ Jugar</a>
+    <a href="https://caeldeth1.itch.io/bugzonia" target="_blank" class="button">▶️ Play</a>
   </div>
 
+  <!-- PROJECT 2 -->
   <div class="project">
     <h3>🚀 Extract from Mars</h3>
-    <p>Shooter con mecánicas de supervivencia en entorno hostil.</p>
+    <p>Shooter with combat and survival gameplay loop.</p>
 
-    <p><strong>Qué hice:</strong></p>
+    <!-- GIF TEMPLATE -->
+    <div class="gif-container">
+      <img src="gifs/mars.gif" alt="Extract from Mars gameplay">
+    </div>
+
     <ul>
-      <li>Sistema de disparo</li>
-      <li>Gestión de enemigos</li>
-      <li>Loop de gameplay completo</li>
+      <li>Shooting system</li>
+      <li>Enemy management</li>
+      <li>Combat feedback systems</li>
     </ul>
 
-    <a href="https://caeldeth1.itch.io/" target="_blank" class="button">▶️ Jugar</a>
+    <a href="https://caeldeth1.itch.io/" target="_blank" class="button">▶️ Play</a>
   </div>
 
-  <h2>🧠 Sobre mí</h2>
+</div>
+
+<div class="container" id="about">
+
+  <h2>🧠 About Me</h2>
   <p>
-    Soy desarrollador de videojuegos especializado en Unity, centrado en sistemas de gameplay,
-    arquitectura y diseño de mecánicas. Me interesa crear experiencias sólidas y escalables.
+    Unity gameplay programmer focused on building scalable systems,
+    game mechanics and clean architecture.
   </p>
 
-  <h2>📩 Contacto</h2>
-  <p>Email: tuemail@gmail.com</p>
-  <p>GitHub: <a href="#">Tu GitHub</a></p>
+  <p>
+    Technologies: Unity · C# · Gameplay Systems · AI · UI
+  </p>
+
+</div>
+
+<div class="container" id="contact">
+
+  <h2>📩 Contact</h2>
+  <p>Email: your@email.com</p>
+  <p>GitHub: <a href="#">Your GitHub</a></p>
+  <p>itch.io: <a href="https://caeldeth1.itch.io/">Your itch.io</a></p>
 
 </div>
 
 <footer>
-  © 2026 Víctor - Game Developer Portfolio
+  © 2026 Victor — Gameplay Programmer
 </footer>
 
 </body>
