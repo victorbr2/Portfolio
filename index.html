@@ -95,9 +95,9 @@ h1 {
   margin: 15px 0;
 }
 
-.gif-container img {
-  width: 100%;
-  border-radius: 8px;
+.gif-container {
+  margin: 15px auto;
+  max-width: 600px;
 }
 
 /* Links (no underline globally) */
@@ -139,16 +139,29 @@ footer {
   <div class="project">
     <h3>Bugzonia</h3>
     <p>Turn-based strategy game with dynamic territory control.</p>
-
     <div class="gif-container">
       <img src="gifs/bugzonia.gif" alt="Bugzonia gameplay">
     </div>
 
-    <ul>
-      <li>Modular turn system</li>
-      <li>Grid-based movement</li>
-      <li>Decoupled architecture using managers</li>
-    </ul>
+   <p><strong>Key Features:</strong></p>
+  <ul>
+    <li>Modular turn-based system</li>
+    <li>Grid-based movement and positioning</li>
+    <li>Dynamic territory control mechanics</li>
+  </ul>
+
+  <p><strong>Technical Implementation:</strong></p>
+  <ul>
+    <li>Event-driven turn system to decouple gameplay flow</li>
+    <li>Custom grid system for tactical movement</li>
+    <li>Manager-based architecture for scalability</li>
+  </ul>
+
+  <p><strong>Challenges:</strong></p>
+  <ul>
+    <li>Synchronizing multiple unit actions within turn logic</li>
+    <li>Balancing territory expansion mechanics</li>
+  </ul>
 
     <a href="https://caeldeth1.itch.io/bugzonia" target="_blank" class="button">Play</a>
   </div>
@@ -161,16 +174,29 @@ footer {
     <div class="gif-container">
       <img src="gifs/ballonFest.gif" alt="Ballon Fest gameplay">
     </div>
+  <p><strong>Key Features:</strong></p>
+<ul>
+  <li>Responsive mobile control system</li>
+  <li>Multiple game modes with different objectives</li>
+  <li>Reward and progression mechanics</li>
+</ul>
 
-    <ul>
-      <li>Movile controls</li>
-      <li>Rewards system</li>
-      <li>Multiple gamemodes</li>
-    </ul>
+<p><strong>Technical Implementation:</strong></p>
+<ul>
+  <li>Touch input system adapted for mobile gameplay</li>
+  <li>Game state management for handling multiple modes</li>
+  <li>Modular reward system for player progression</li>
+</ul>
+
+<p><strong>Challenges:</strong></p>
+<ul>
+  <li>Balancing difficulty across different game modes</li>
+  <li>Ensuring responsive and intuitive touch controls</li>
+</ul>
 
     <a href="https://caeldeth1.itch.io/balloon-fest" target="_blank" class="button">Play</a>
   </div>
-    <h2>Upcoming projects</h2>
+    <h2>In Development</h2>
     <!-- PROJECT 3 -->
   <div class="project">
     <h3>Egypt Commander</h3>
@@ -179,12 +205,25 @@ footer {
     <div class="gif-container">
       <img src="gifs/egyptCommander.gif" alt="EgyptCommander art style">
     </div>
+  <p><strong>Key Features:</strong></p>
+<ul>
+  <li>AI-driven troop combat and movement</li>
+  <li>Procedural map generation system</li>
+  <li>Strategic unit management mechanics</li>
+</ul>
 
-    <ul>
-      <li>Ai troop combat & movement</li>
-      <li>Procedural map creation</li>
-      <li>Voxel art style</li>
-    </ul>
+<p><strong>Technical Implementation:</strong></p>
+<ul>
+  <li>State-based AI system for unit decision-making</li>
+  <li>Procedural generation algorithms for map creation</li>
+  <li>Grid-based system for unit positioning and movement</li>
+</ul>
+
+<p><strong>Challenges:</strong></p>
+<ul>
+  <li>Designing flexible AI behaviors for different unit types</li>
+  <li>Maintaining balance between randomness and playability in procedural maps</li>
+</ul>
 
     <a href="https://caeldeth1.itch.io/egypt-commander" target="_blank" class="button">Check</a>
   </div>
@@ -192,11 +231,25 @@ footer {
   <div class="project">
     <h3>Potion Grabber</h3>
     <p>Incremental type game set in the medieval age</p>
-    <ul>
-      <li>Incremental mechanics</li>
-      <li>Upgrade tree</li>
-      <li>Movile platforms</li>
-    </ul>
+    <p><strong>Key Features:</strong></p>
+<ul>
+  <li>Incremental progression and idle mechanics</li>
+  <li>Upgrade tree system with scaling effects</li>
+  <li>Resource management and economy loop</li>
+</ul>
+
+<p><strong>Technical Implementation:</strong></p>
+<ul>
+  <li>Scalable upgrade system using Scriptable Objects</li>
+  <li>Event-driven resource generation system</li>
+  <li>Persistent data system for player progression</li>
+</ul>
+
+<p><strong>Challenges:</strong></p>
+<ul>
+  <li>Balancing exponential growth and progression pacing</li>
+  <li>Designing a flexible system for adding new upgrades and effects</li>
+</ul>
   </div>
 </div>
 
@@ -220,7 +273,7 @@ footer {
   <p>Email: vbr084299@gmail.com</p>
   <p>GitHub: <a href="https://github.com/victorbr2">victorbr2</a></p>
   <p>itch.io: <a href="https://caeldeth1.itch.io/">caeldeth1</a></p>
-
+  <p>Location: Barcelona, Spain</p>
 </div>
 
 <footer>
