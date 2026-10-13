@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d12">
+  <meta name="description" content="Victor — Technical Artist working across Unity, UI systems, optimization and scalable game production workflows.">
+  <title>Victor — Technical Artist & Game Developer</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --surface: rgba(21, 25, 35, .82);
+      --surface-solid: #151923;
+      --surface-hover: #1b2130;
+      --text: #f2f4f8;
+      --muted: #a1a9ba;
+      --line: rgba(188, 199, 220, .14);
+      --accent: #b9f36b;
+      --accent-ink: #17200d;
+      --blue: #8bb8ff;
+      --radius: 22px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(84, 111, 161, .16), transparent 38rem),
+        radial-gradient(ellipse at 92% 28%, rgba(185, 243, 107, .055), transparent 34rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .shell { width: min(var(--max), calc(100% - 44px)); margin-inline: auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(11, 13, 18, .78);
+      backdrop-filter: blur(18px);
+    }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 750; letter-spacing: -.04em; }
+    .brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 10px; background: var(--accent); color: var(--accent-ink); font-size: 14px; font-weight: 900; }
+    .nav-links { display: flex; align-items: center; gap: 26px; color: var(--muted); font-size: 13px; font-weight: 600; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links .nav-cta { padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--text); }
+    .hero { padding: 100px 0 82px; position: relative; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--accent); font-size: 12px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 16px rgba(185,243,107,.5); }
+    h1 { max-width: 850px; margin: 20px 0 18px; font-size: clamp(48px, 8vw, 88px); line-height: .99; letter-spacing: -.075em; font-weight: 760; }
+    h1 span { color: var(--accent); }
+    .hero-copy { max-width: 660px; color: var(--muted); font-size: clamp(16px, 2vw, 19px); margin: 0; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 0 17px; border-radius: 999px; border: 1px solid var(--line); color: var(--text); font-size: 13px; font-weight: 700; transition: transform .2s, background .2s, border-color .2s; }
+    .button:hover { transform: translateY(-2px); border-color: rgba(185,243,107,.5); }
+    .button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .button.primary:hover { background: #c9ff83; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 38px; }
+    .pill { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; padding: 6px 11px; color: #c5ccda; background: rgba(255,255,255,.025); font-size: 11px; font-weight: 650; }
+    .section { padding: 48px 0 60px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 25px; }
+    .section-kicker { color: var(--accent); text-transform: uppercase; letter-spacing: .13em; font-size: 11px; font-weight: 800; }
+    h2 { margin: 5px 0 0; font-size: clamp(28px, 4vw, 40px); line-height: 1.1; letter-spacing: -.055em; }
+    .section-note { max-width: 390px; margin: 0; color: var(--muted); font-size: 13px; }
+    .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .project {
+      min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(25,30,42,.92), rgba(17,20,28,.94));
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+    .project:hover { transform: translateY(-4px); border-color: rgba(185,243,107,.32); background: linear-gradient(145deg, rgba(30,37,49,.98), rgba(17,20,28,.98)); }
+    .project-media { aspect-ratio: 16 / 9; overflow: hidden; background: #10141c; border-bottom: 1px solid var(--line); position: relative; }
+    .project-media img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+    .project:hover .project-media img { transform: scale(1.035); }
+    .project-media.contain img { object-fit: contain; padding: 18px; }
+    .project-body { padding: 22px 23px 23px; }
+    .project-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    h3 { margin: 0; font-size: 21px; letter-spacing: -.04em; }
+    .status { white-space: nowrap; border-radius: 999px; padding: 5px 9px; background: rgba(185,243,107,.1); color: var(--accent); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+    .status.wip { color: var(--blue); background: rgba(139,184,255,.1); }
+    .project-desc { color: var(--muted); font-size: 13px; margin: 10px 0 17px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+    .tags span { font-size: 10px; color: #c5ccda; padding: 5px 8px; background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 7px; }
+    .project-link { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 750; color: var(--accent); }
+    .project-link:hover { gap: 11px; }
+    .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
+    .panel { border: 1px solid var(--line); border-radius: var(--radius); padding: 27px; background: var(--surface); }
+    .panel p { color: var(--muted); font-size: 14px; margin: 12px 0 0; }
+    .panel p:first-of-type { margin-top: 15px; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .skill-list span { padding: 7px 10px; border: 1px solid var(--line); border-radius: 9px; font-size: 11px; color: #d7dce7; background: rgba(255,255,255,.025); }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 20px; }
+    footer { margin-top: 40px; border-top: 1px solid var(--line); padding: 24px 0 30px; color: #7f889b; font-size: 11px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .reveal { animation: rise .65s both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    @media (max-width: 720px) {
+      .shell { width: min(var(--max), calc(100% - 30px)); }
+      .nav { min-height: 64px; }
+      .nav-links { gap: 13px; font-size: 12px; }
+      .nav-links a:nth-child(2) { display: none; }
+      .hero { padding: 76px 0 54px; }
+      .section { padding: 35px 0 42px; }
+      .project-grid, .about-grid { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; gap: 10px; }
+      .project-body { padding: 19px; }
+    }
+    @media (max-width: 420px) {
+      .nav-links { gap: 10px; }
+      .nav-links .nav-cta { padding: 8px 10px; }
+      .hero-actions .button { flex: 1; }
+      .project-top { align-items: start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Victor, home"><span class="brand-mark">V.</span><span>Victor</span></a>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a class="nav-cta" href="#contact">Get in touch ↗</a>
+      </div>
+    </nav>
+  </div>
+
+  <main id="top">
+    <header class="hero shell reveal">
+      <div class="eyebrow">Technical Artist · Game Development</div>
+      <h1>Connecting creative ideas with <span>technical craft.</span></h1>
+      <p class="hero-copy">I work across Unity, UI systems, asset optimization and production workflows — building practical, scalable solutions that help game teams bring ideas to life.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#projects">Explore projects <span aria-hidden="true">↘</span></a>
+        <a class="button" href="#contact">Contact me <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hero-meta" aria-label="Core skills">
+        <span class="pill">Unity</span><span class="pill">C#</span><span class="pill">UI Systems</span>
+        <span class="pill">Optimization</span><span class="pill">Technical Design</span>
+      </div>
+    </header>
+
+    <section class="section shell" id="projects">
+      <div class="section-head">
+        <div><div class="section-kicker">Selected work</div><h2>Projects</h2></div>
+        <p class="section-note">A selection of game projects and prototypes, from gameplay systems to scalable UI and content workflows.</p>
+      </div>
+      <div class="project-grid">
+        <article class="project">
+          <div class="project-media"><img src="gifs/bugzonia.gif" alt="Bugzonia gameplay" loading="lazy"></div>
+          <div class="project-body">
+            <div class="project-top"><h3>Bugzonia</h3><span class="status">Game project</span></div>
+            <p class="project-desc">A turn-based strategy game about territory control, featuring rival insect factions in an Amazon-inspired setting.</p>
+            <div class="tags"><span>Unity</span><span>ScriptableObjects</span><span>Mobile UI</span><span>Optimization</span></div>
+            <a class="project-link" href="https://caeldeth1.itch.io/bugzonia" target="_blank" rel="noopener noreferrer">View project <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-media"><img src="gifs/ballonFest.gif" alt="Balloon Fest gameplay" loading="lazy"></div>
+          <div class="project-body">
+            <div class="project-top"><h3>Balloon Fest</h3><span class="status">Game project</span></div>
+            <p class="project-desc">An arcade action game built around responsive touch controls, varied game modes and reward progression.</p>
+            <div class="tags"><span>Unity</span><span>Mobile Controls</span><span>UI</span><span>Progression</span></div>
+            <a class="project-link" href="https://caeldeth1.itch.io/balloon-fest" target="_blank" rel="noopener noreferrer">View project <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-media"><img src="gifs/battlepass.gif" alt="Battle pass UI prototype" loading="lazy"></div>
+          <div class="project-body">
+            <div class="project-top"><h3>Battle Pass Mockup</h3><span class="status">UI prototype</span></div>
+            <p class="project-desc">A scalable battle pass prototype focused on reward tracks, progression, reusable UI components and data-driven content.</p>
+            <div class="tags"><span>Unity</span><span>UI Architecture</span><span>ScriptableObjects</span><span>UX</span></div>
+            <a class="project-link" href="https://caeldeth1.itch.io/battlepass-mockup" target="_blank" rel="noopener noreferrer">View prototype <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-media contain"><img src="gifs/potionGrabber.gif" alt="Potion Grabber gameplay showing collectible potions and progression" loading="lazy"></div>
+          <div class="project-body">
+            <div class="project-top"><h3>Potion Grabber</h3><span class="status">In development</span></div>
+            <p class="project-desc">A pixel-art incremental game where you steal valuable potions, sell your haul at the end of each round and invest in upgrades.</p>
+            <div class="tags"><span>Unity 6</span><span>Progression Systems</span><span>Economy Design</span><span>UI</span></div>
+            <p class="project-desc">Built data-driven upgrade effects and reusable progression systems with ScriptableObjects, designed to support balancing and future content.</p>
+            <!-- Add an itch.io link here when the public game page is ready. -->
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="development">
+      <div class="section-head">
+        <div><div class="section-kicker">Work in progress</div><h2>In development</h2></div>
+        <p class="section-note">Experiments and prototypes exploring systems, procedural content and strategic gameplay.</p>
+      </div>
+      <div class="project-grid">
+        <article class="project">
+          <div class="project-media"><img src="gifs/egyptCommander.gif" alt="Egypt Commander visual development" loading="lazy"></div>
+          <div class="project-body">
+            <div class="project-top"><h3>Egypt Commander</h3><span class="status wip">In progress</span></div>
+            <p class="project-desc">A strategy and troop-management project set in ancient Egypt, exploring AI-driven units, procedural maps and data-driven configuration.</p>
+            <div class="tags"><span>Unity</span><span>AI Systems</span><span>Procedural Generation</span><span>Tools</span></div>
+            <a class="project-link" href="https://caeldeth1.itch.io/egypt-commander" target="_blank" rel="noopener noreferrer">Project page <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="about">
+      <div class="section-head">
+        <div><div class="section-kicker">A little about me</div><h2>Art meets engineering.</h2></div>
+      </div>
+      <div class="about-grid">
+        <div class="panel">
+          <h3>My approach</h3>
+          <p>I'm a Technical Artist focused on connecting art, design and engineering. I enjoy building clear, maintainable systems that make production more efficient without losing sight of the player experience.</p>
+          <p>My interests include UI implementation, asset optimization, data-driven workflows and tools that help teams iterate faster and scale content with confidence.</p>
+        </div>
+        <div class="panel">
+          <h3>Tools & focus</h3>
+          <p>Technologies and areas I use across my projects.</p>
+          <div class="skill-list">
+            <span>Unity</span><span>C#</span><span>UI Systems</span><span>ScriptableObjects</span>
+            <span>Shader Graph</span><span>Asset Optimization</span><span>Technical Design</span><span>Production Pipelines</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="contact">
+      <div class="panel">
+        <div class="section-kicker">Let's connect</div>
+        <h2>Have a project in mind?</h2>
+        <p>I'm interested in opportunities where technical problem-solving, visual quality and game development come together.</p>
+        <div class="contact-row">
+          <a class="button primary" href="mailto:vbr084299@gmail.com">Email me ↗</a>
+          <a class="button" href="https://github.com/victorbr2" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a class="button" href="https://caeldeth1.itch.io/" target="_blank" rel="noopener noreferrer">itch.io ↗</a>
+        </div>
+        <p>Based in Barcelona, Spain.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner shell"><span>© 2026 Victor · Technical Artist</span><a href="#top">Back to top ↑</a></div>
+  </footer>
+</body>
+</html>
