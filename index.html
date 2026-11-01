@@ -4,17 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0d12">
-  <meta name="description" content="Victor — Technical Artist and Game Developer working across Unity, technical art, UI/UX, visual development and interactive experiences.">
+  <meta name="description" content="Victor Bosch - Game developer working in Unity and C# on gameplay systems, progression, game economies and UI/UX.">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Victor — Technical Artist & Game Developer">
-  <meta property="og:description" content="Explore my Unity projects, technical art, UI/UX work and game development portfolio.">
+  <meta property="og:title" content="Victor Bosch - Game Developer | UI/UX & Gameplay Systems">
+  <meta property="og:description" content="Unity projects focused on gameplay systems, progression, game economies and UI/UX.">
   <meta property="og:image" content="https://victorbr2.github.io/Portfolio/img/logo.png">
   <meta name="twitter:card" content="summary">
 
-  <title>Victor — Technical Artist & Game Developer</title>
+  <title>Victor Bosch - Game Developer | UI/UX & Gameplay Systems</title>
 
   <link rel="icon" type="image/png" href="img/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..900&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -161,11 +165,11 @@
     }
 
     h1 {
-      max-width: 850px;
+      max-width: 900px;
       margin: 20px 0 18px;
-      font-size: clamp(48px, 8vw, 88px);
-      line-height: .99;
-      letter-spacing: -.075em;
+      font-size: clamp(44px, 7.5vw, 84px);
+      line-height: 1;
+      letter-spacing: -.07em;
       font-weight: 760;
     }
 
@@ -280,6 +284,7 @@
     }
 
     .project {
+      position: relative;
       min-width: 0;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -295,7 +300,8 @@
         background .22s ease;
     }
 
-    .project:hover {
+    /* Only cards with a link react to hover; the whole card is clickable */
+    .project.is-linked:hover {
       transform: translateY(-4px);
       border-color: rgba(185, 243, 107, .32);
       background: linear-gradient(
@@ -303,6 +309,10 @@
         rgba(30, 37, 49, .98),
         rgba(17, 20, 28, .98)
       );
+    }
+
+    .project.is-linked:has(.project-link:focus-visible) {
+      border-color: var(--accent);
     }
 
     .project-media {
@@ -313,7 +323,8 @@
       position: relative;
     }
 
-    .project-media img {
+    .project-media img,
+    .project-media video {
       display: block;
       width: 100%;
       height: 100%;
@@ -321,11 +332,13 @@
       transition: transform .45s ease;
     }
 
-    .project:hover .project-media img {
+    .project.is-linked:hover .project-media img,
+    .project.is-linked:hover .project-media video {
       transform: scale(1.035);
     }
 
-    .project-media.contain img {
+    .project-media.contain img,
+    .project-media.contain video {
       object-fit: contain;
       padding: 18px;
     }
@@ -345,6 +358,13 @@
       margin: 0;
       font-size: 21px;
       letter-spacing: -.04em;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
     }
 
     .status {
@@ -367,6 +387,18 @@
     .status.featured {
       color: var(--accent);
       background: rgba(185, 243, 107, .12);
+    }
+
+    .status.released {
+      color: #d7dce7;
+      background: rgba(255, 255, 255, .07);
+    }
+
+    .project-meta {
+      margin: 6px 0 0;
+      color: #c5ccda;
+      font-size: 12px;
+      font-weight: 600;
     }
 
     .project-desc {
@@ -402,9 +434,18 @@
       font-size: 12px;
       font-weight: 750;
       color: var(--accent);
+      transition: gap .2s;
     }
 
-    .project-link:hover {
+    /* Stretches the link over the whole card */
+    .project-link::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+    }
+
+    .project.is-linked:hover .project-link {
       gap: 11px;
     }
 
@@ -499,6 +540,26 @@
       }
     }
 
+    /* A lone card in the last row spans the full width as a horizontal card */
+    @media (min-width: 721px) {
+      .project-grid > .project:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+
+      .project-grid > .project:last-child:nth-child(odd) .project-media {
+        aspect-ratio: auto;
+        min-height: 300px;
+        border-bottom: 0;
+        border-right: 1px solid var(--line);
+      }
+
+      .project-grid > .project:last-child:nth-child(odd) .project-body {
+        align-self: center;
+      }
+    }
+
     @media (max-width: 720px) {
       .shell {
         width: min(var(--max), calc(100% - 30px));
@@ -511,10 +572,6 @@
       .nav-links {
         gap: 13px;
         font-size: 12px;
-      }
-
-      .nav-links a:nth-child(2) {
-        display: none;
       }
 
       .hero {
@@ -542,8 +599,12 @@
     }
 
     @media (max-width: 420px) {
+      .brand-name {
+        display: none;
+      }
+
       .nav-links {
-        gap: 10px;
+        gap: 12px;
       }
 
       .nav-links .nav-cta {
@@ -558,6 +619,10 @@
         align-items: start;
         flex-direction: column;
       }
+
+      .badges {
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
@@ -565,14 +630,15 @@
 <body>
   <div class="topbar">
     <nav class="nav shell" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="Victor, home">
+      <a class="brand" href="#top" aria-label="Victor Bosch, home">
         <span class="brand-mark">V.</span>
-        <span>Victor</span>
+        <span class="brand-name">Victor Bosch</span>
       </a>
 
       <div class="nav-links">
         <a href="#projects">Projects</a>
         <a href="#about">About</a>
+        <a href="cv.pdf" target="_blank" rel="noopener">CV</a>
         <a class="nav-cta" href="#contact">Get in touch ↗</a>
       </div>
     </nav>
@@ -580,22 +646,24 @@
 
   <main id="top">
     <header class="hero shell reveal">
-      <div class="eyebrow">Technical Artist · Game Developer</div>
+      <div class="eyebrow">Game Developer · UI/UX &amp; Gameplay Systems</div>
 
       <h1>
-        Where <span>art and technology</span> meet.
+        I design and build <span>game systems and interfaces</span> in Unity.
       </h1>
 
       <p class="hero-copy">
-        I create interactive experiences with Unity, combining technical art,
-        visual development and UI/UX to bring game worlds to life. I enjoy
-        building systems and workflows that connect creative ideas with
-        practical implementation.
+        I take mechanics from design to working code: upgrade trees,
+        progression, game economies and the UI that makes them clear
+        to the player. Unity and C# developer based in Barcelona.
       </p>
 
       <div class="hero-actions">
         <a class="button primary" href="#projects">
           Explore projects <span aria-hidden="true">↘</span>
+        </a>
+        <a class="button" href="cv.pdf" target="_blank" rel="noopener">
+          View CV <span aria-hidden="true">↗</span>
         </a>
         <a class="button" href="#contact">
           Contact me <span aria-hidden="true">↗</span>
@@ -604,10 +672,10 @@
 
       <div class="hero-meta" aria-label="Core skills">
         <span class="pill">Unity</span>
-        <span class="pill">Technical Art</span>
-        <span class="pill">UI/UX</span>
-        <span class="pill">Visual Development</span>
-        <span class="pill">Game Development</span>
+        <span class="pill">C#</span>
+        <span class="pill">UI/UX Design</span>
+        <span class="pill">Gameplay Systems</span>
+        <span class="pill">Progression &amp; Economy</span>
       </div>
     </header>
 
@@ -619,28 +687,33 @@
         </div>
 
         <p class="section-note">
-          Games and prototypes I've designed and developed, exploring
-          technical art, visual systems, UI/UX and interactive experiences.
+          Games and prototypes I've designed and built, from progression
+          systems and game economies to UI architecture and strategy AI.
         </p>
       </div>
 
       <div class="project-grid">
 
         <!-- Potion Grabber -->
-        <article class="project">
+        <article class="project is-linked">
           <div class="project-media contain">
-            <img
-              src="gifs/potionGrabber.gif"
-              alt="Potion Grabber gameplay showing collectible potions and progression"
-              loading="lazy"
-            >
+            <video
+              src="videos/potionGrabber.mp4"
+              poster="videos/potionGrabber.jpg"
+              muted loop playsinline preload="none"
+              aria-label="Potion Grabber gameplay showing collectible potions and progression"
+            ></video>
           </div>
 
           <div class="project-body">
             <div class="project-top">
               <h3>Potion Grabber</h3>
-              <span class="status featured">Featured project</span>
+              <div class="badges">
+                <span class="status featured">Featured project</span>
+              </div>
             </div>
+
+            <p class="project-meta">Solo project · 1-3 months · PC, Web, Android</p>
 
             <p class="project-desc">
               An incremental game developed from scratch in Unity 6.
@@ -649,62 +722,130 @@
             </p>
 
             <p class="project-desc">
-              Designed and implemented the game's progression systems,
-              data-driven upgrade effects and UI, using ScriptableObjects
-              to support reusable mechanics, balancing and future content.
+              I designed and built the core systems: a 44-node upgrade
+              tree split across 4 branches, the game economy and its
+              balancing, and the full UI. Upgrade effects are data-driven
+              through ScriptableObjects, so mechanics can be reused,
+              rebalanced and extended with new content.
             </p>
 
             <div class="tags">
               <span>Unity 6</span>
-              <span>Technical Implementation</span>
+              <span>C#</span>
+              <span>Progression Design</span>
+              <span>Game Economy</span>
               <span>UI Development</span>
               <span>ScriptableObjects</span>
-              <span>Progression Design</span>
             </div>
-              <a
+
+            <a
               class="project-link"
               href="https://caeldeth1.itch.io/potion-grabber"
               target="_blank"
               rel="noopener noreferrer"
-              >
-              View project <span aria-hidden="true">↗</span>
+            >
+              Play on itch.io <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Egypt Commander -->
+        <article class="project is-linked">
+          <div class="project-media">
+            <video
+              src="videos/egyptCommander.mp4"
+              poster="videos/egyptCommander.jpg"
+              muted loop playsinline preload="none"
+              aria-label="Egypt Commander isometric strategy gameplay"
+            ></video>
+          </div>
+
+          <div class="project-body">
+            <div class="project-top">
+              <h3>Egypt Commander</h3>
+              <div class="badges">
+                <span class="status featured">Featured project</span>
+                <span class="status released">Released</span>
+              </div>
+            </div>
+
+            <p class="project-meta">Solo project · Released on itch.io · In active development</p>
+
+            <p class="project-desc">
+              An isometric real-time strategy game with a cartoon voxel
+              style, where the ancient Egyptians defend their pyramid
+              from an alien invasion. Includes Story, Hard, Very Hard
+              and Roguelike modes.
+            </p>
+
+            <p class="project-desc">
+              I built the troop management, unit AI and resource
+              management systems, with configurable gameplay data so
+              units and balance can be tuned and expanded. I also
+              designed the UI, aiming for a clean, flat look in the
+              style of mobile strategy games.
+            </p>
+
+            <div class="tags">
+              <span>Unity</span>
+              <span>Real-Time Strategy</span>
+              <span>Unit AI</span>
+              <span>Resource Management</span>
+              <span>Configurable Systems</span>
+              <span>UI/UX Design</span>
+            </div>
+
+            <a
+              class="project-link"
+              href="https://caeldeth1.itch.io/egypt-commander"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Play &amp; watch the trailer <span aria-hidden="true">↗</span>
             </a>
           </div>
         </article>
 
         <!-- Battle Pass Mockup -->
-        <article class="project">
+        <article class="project is-linked">
           <div class="project-media">
-            <img
-              src="gifs/battlepass.gif"
-              alt="Battle Pass UI prototype displaying reward tracks and progression"
-              loading="lazy"
-            >
+            <video
+              src="videos/battlepass.mp4"
+              poster="videos/battlepass.jpg"
+              muted loop playsinline preload="none"
+              aria-label="Battle Pass UI prototype displaying reward tracks and progression"
+            ></video>
           </div>
 
           <div class="project-body">
             <div class="project-top">
               <h3>Battle Pass Mockup</h3>
-              <span class="status">UI prototype</span>
+              <div class="badges">
+                <span class="status">UI prototype</span>
+              </div>
             </div>
 
+            <p class="project-meta">Solo project · Figma to Unity</p>
+
             <p class="project-desc">
-              A battle pass prototype developed from scratch in Unity,
-              focused on presenting rewards, progression and player
-              information through a clear and consistent interface.
+              A battle pass prototype focused on presenting rewards,
+              progression and player information through a clear and
+              consistent interface.
             </p>
 
             <p class="project-desc">
-              Designed and implemented a modular UI structure with
-              reusable components and data-driven reward content,
-              exploring scalable interface workflows.
+              I designed the interface in Figma, then built it in Unity
+              with reusable components for tiers, rewards and progress,
+              reward content driven by ScriptableObjects, and animations
+              and feedback for unlocks and transitions.
             </p>
 
             <div class="tags">
               <span>Unity</span>
+              <span>Figma</span>
               <span>UI/UX Design</span>
               <span>UI Architecture</span>
-              <span>Visual Development</span>
+              <span>UI Animation</span>
               <span>ScriptableObjects</span>
             </div>
 
@@ -720,20 +861,25 @@
         </article>
 
         <!-- Bugzonia -->
-        <article class="project">
+        <article class="project is-linked">
           <div class="project-media">
-            <img
-              src="gifs/bugzonia.gif"
-              alt="Bugzonia gameplay showing an insect strategy game"
-              loading="lazy"
-            >
+            <video
+              src="videos/bugzonia.mp4"
+              poster="videos/bugzonia.jpg"
+              muted loop playsinline preload="none"
+              aria-label="Bugzonia gameplay showing an insect strategy game"
+            ></video>
           </div>
 
           <div class="project-body">
             <div class="project-top">
               <h3>Bugzonia</h3>
-              <span class="status">Game project</span>
+              <div class="badges">
+                <span class="status">Team project</span>
+              </div>
             </div>
+
+            <p class="project-meta">Team of 5 · 3-6 months · Android, PC, Web</p>
 
             <p class="project-desc">
               A turn-based strategy game set in an Amazon-inspired
@@ -742,17 +888,19 @@
             </p>
 
             <p class="project-desc">
-              Contributed to production, UI/UX design, technical art
-              and technical implementation, helping shape the game's
-              visual presentation and player experience as part of a team.
+              A student team project at LCI Barcelona. I designed the
+              UI/UX and implemented it in Unity, handled production and
+              task planning for the team, and worked on mobile
+              optimization and technical art.
             </p>
 
             <div class="tags">
               <span>Unity</span>
-              <span>UI/UX</span>
-              <span>Technical Art</span>
+              <span>UI/UX Design</span>
+              <span>UI Implementation</span>
               <span>Production</span>
               <span>Mobile Optimization</span>
+              <span>Technical Art</span>
             </div>
 
             <a
@@ -761,26 +909,31 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              View project <span aria-hidden="true">↗</span>
+              Play on itch.io <span aria-hidden="true">↗</span>
             </a>
           </div>
         </article>
 
         <!-- Balloon Fest -->
-        <article class="project">
+        <article class="project is-linked">
           <div class="project-media">
-            <img
-              src="gifs/ballonFest.gif"
-              alt="Balloon Fest arcade gameplay"
-              loading="lazy"
-            >
+            <video
+              src="videos/ballonFest.mp4"
+              poster="videos/ballonFest.jpg"
+              muted loop playsinline preload="none"
+              aria-label="Balloon Fest arcade gameplay"
+            ></video>
           </div>
 
           <div class="project-body">
             <div class="project-top">
               <h3>Balloon Fest</h3>
-              <span class="status">Game project</span>
+              <div class="badges">
+                <span class="status">Game project</span>
+              </div>
             </div>
+
+            <p class="project-meta">Solo project · Android, PC, Web</p>
 
             <p class="project-desc">
               An arcade action game developed from scratch in Unity,
@@ -789,15 +942,16 @@
             </p>
 
             <p class="project-desc">
-              Designed and implemented the project from the ground up,
-              bringing together gameplay, interface design and the
-              systems needed to deliver a cohesive mobile experience.
+              I designed and built the whole project, from gameplay and
+              touch controls to the interface and reward systems, aiming
+              for a cohesive mobile experience.
             </p>
 
             <div class="tags">
               <span>Unity</span>
               <span>UI/UX</span>
               <span>Mobile Development</span>
+              <span>Touch Controls</span>
               <span>Gameplay Systems</span>
             </div>
 
@@ -807,7 +961,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              View project <span aria-hidden="true">↗</span>
+              Play on itch.io <span aria-hidden="true">↗</span>
             </a>
           </div>
         </article>
@@ -823,75 +977,33 @@
         </div>
 
         <p class="section-note">
-          Ongoing projects exploring strategy, procedural content,
-          interactive environments and technical implementation.
+          Ongoing projects exploring interactive environments and
+          educational experiences.
         </p>
       </div>
 
       <div class="project-grid">
 
-        <!-- Egypt Commander -->
-        <article class="project">
-          <div class="project-media">
-            <img
-              src="gifs/egyptCommander.gif"
-              alt="Egypt Commander strategy game in development"
-              loading="lazy"
-            >
-          </div>
-
-          <div class="project-body">
-            <div class="project-top">
-              <h3>Egypt Commander</h3>
-              <span class="status wip">In development</span>
-            </div>
-
-            <p class="project-desc">
-              A strategy and troop management game set in ancient Egypt,
-              exploring unit AI, procedural map generation and
-              configurable gameplay systems.
-            </p>
-
-            <p class="project-desc">
-              Developed from scratch in Unity, with a focus on building
-              the underlying systems and tools needed to support
-              strategic gameplay and future content.
-            </p>
-
-            <div class="tags">
-              <span>Unity</span>
-              <span>AI Systems</span>
-              <span>Procedural Generation</span>
-              <span>Technical Development</span>
-              <span>Tools</span>
-            </div>
-
-            <a
-              class="project-link"
-              href="https://caeldeth1.itch.io/egypt-commander"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Project page <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </article>
-
         <!-- Solar Drive -->
         <article class="project">
           <div class="project-media">
-            <img
-              src="gifs/SolarDrive.gif"
-              alt="Solar Drive interactive space simulation"
-              loading="lazy"
-            >
+            <video
+              src="videos/SolarDrive.mp4"
+              poster="videos/SolarDrive.jpg"
+              muted loop playsinline preload="none"
+              aria-label="Solar Drive interactive space simulation"
+            ></video>
           </div>
 
           <div class="project-body">
             <div class="project-top">
               <h3>Solar Drive</h3>
-              <span class="status wip">In development</span>
+              <div class="badges">
+                <span class="status wip">In development</span>
+              </div>
             </div>
+
+            <p class="project-meta">Solo project</p>
 
             <p class="project-desc">
               An interactive Solar System experience where players can
@@ -900,9 +1012,8 @@
             </p>
 
             <p class="project-desc">
-              Developed from scratch in Unity, exploring interactive
-              environments and ways to present scientific concepts
-              through a playable experience.
+              Built from scratch in Unity. Current focus: the spaceship
+              piloting controls.
             </p>
 
             <div class="tags">
@@ -921,7 +1032,7 @@
       <div class="section-head">
         <div>
           <div class="section-kicker">A little about me</div>
-          <h2>Art meets technology.</h2>
+          <h2>Design thinking, built in-engine.</h2>
         </div>
       </div>
 
@@ -930,50 +1041,52 @@
           <h3>My approach</h3>
 
           <p>
-            I'm a game developer focused on the intersection of technical
-            art, visual design and interactive systems. I enjoy finding
-            practical ways to bring creative ideas to life, from shaping
-            user interfaces and visual experiences to building the tools
-            and systems that support them.
+            I'm a game developer with a Video Game Design diploma from
+            LCI Barcelona. I focus on gameplay systems and UI/UX:
+            designing how progression, economies and mechanics should
+            work, and building them myself in Unity with C#.
           </p>
 
           <p>
-            Most of my projects have been developed independently from
-            the ground up, giving me the opportunity to work across
-            different stages of development and understand how art,
-            design and technology come together. Through Bugzonia, I've
-            also gained experience collaborating within a team, focusing
-            on production, UI/UX, technical art and technical implementation.
+            Most of my projects are solo, built from the ground up, so
+            I've worked through every stage from first prototype to
+            published build. On Bugzonia I worked in a team of five,
+            handling UI/UX design and implementation, production, mobile
+            optimization and technical art.
           </p>
 
           <p>
-            I'm interested in opportunities where I can contribute to
-            the visual quality, usability and technical foundations of
-            games while continuing to grow as a Technical Artist.
+            I'm looking for UI/UX, gameplay or systems roles where I can
+            bring both the design thinking and the technical
+            implementation.
           </p>
         </div>
 
         <div class="panel">
-          <h3>Tools & focus</h3>
+          <h3>Tools &amp; focus</h3>
 
           <p>
-            Technologies and disciplines I explore throughout my projects.
+            Technologies and disciplines I work with across my projects.
           </p>
 
           <div class="skill-list">
             <span>Unity</span>
             <span>C#</span>
-            <span>Technical Art</span>
             <span>UI/UX Design</span>
-            <span>Visual Development</span>
+            <span>Figma</span>
             <span>UI Implementation</span>
-            <span>ScriptableObjects</span>
             <span>Gameplay Systems</span>
-            <span>Mobile Development</span>
-            <span>Game Design</span>
-            <span>Optimization</span>
+            <span>Progression &amp; Economy</span>
+            <span>ScriptableObjects</span>
+            <span>Game AI</span>
+            <span>Technical Art</span>
+            <span>Mobile Optimization</span>
             <span>Production</span>
           </div>
+
+          <p>
+            Spanish and Catalan (native) · English (advanced)
+          </p>
         </div>
       </div>
     </section>
@@ -982,18 +1095,20 @@
       <div class="panel">
         <div class="section-kicker">Let's connect</div>
 
-        <h2>Let's build something meaningful.</h2>
+        <h2>Let's talk.</h2>
 
         <p>
-          I'm open to opportunities where technical art, visual quality
-          and game development come together. If you're looking for
-          someone who enjoys bridging creative ideas and technical
-          implementation, I'd be happy to connect.
+          Open to UI/UX, gameplay and systems design roles, remote or
+          hybrid in Barcelona. The fastest way to reach me is by email.
         </p>
 
         <div class="contact-row">
           <a class="button primary" href="mailto:vbr084299@gmail.com">
             Email me ↗
+          </a>
+
+          <a class="button" href="cv.pdf" target="_blank" rel="noopener">
+            View CV ↗
           </a>
 
           <a
@@ -1003,6 +1118,15 @@
             rel="noopener noreferrer"
           >
             GitHub ↗
+          </a>
+
+          <a
+            class="button"
+            href="https://www.linkedin.com/in/victorboschcdeth/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn ↗
           </a>
 
           <a
@@ -1022,9 +1146,29 @@
 
   <footer>
     <div class="footer-inner shell">
-      <span>© 2026 Victor · Technical Artist & Game Developer</span>
+      <span>© 2026 Victor Bosch · Game Developer</span>
       <a href="#top">Back to top ↑</a>
     </div>
   </footer>
+  <script>
+    // Plays project videos only while visible; respects reduced motion
+    (() => {
+      const videos = document.querySelectorAll(".project-media video");
+      if (!videos.length) return;
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const play = v => { if (!reduce.matches) v.play().catch(() => {}); };
+
+      if (!("IntersectionObserver" in window)) {
+        videos.forEach(play);
+        return;
+      }
+
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => (e.isIntersecting ? play(e.target) : e.target.pause()));
+      }, { threshold: 0.25 });
+
+      videos.forEach(v => io.observe(v));
+    })();
+  </script>
 </body>
 </html>
